@@ -1,17 +1,20 @@
-// import { Navigate, useLocation } from "react-router-dom";
-// import { useAuthStore } from "../store/authStore";
+import React from "react";
+import { Navigate, useLocation } from "react-router-dom";
+import { useAuthStore } from "../store/authStore";
 
-// interface Props {
-//   children: JSX.Element;
-// }
+interface Props {
+  children: React.ReactNode;
+}
 
-// export default function AuthGuard({ children }: Props) {
-//   const token = useAuthStore((s) => s.token);
-//   const location = useLocation();
+export default function AuthGuard({ children }: Props) {
+  const token = useAuthStore((s) => s.token);
+  const location = useLocation();
 
-//   if (!token) {
-//     return <Navigate to="/login" replace state={{ from: location }} />;
-//   }
+  // If not logged in, redirect to /login
+  if (!token) {
+    return <Navigate to="/login" replace state={{ from: location }} />;
+  }
 
-//   return children;
-// }
+  // Logged in → show children
+  return children;
+}
