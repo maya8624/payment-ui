@@ -1,23 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
+import App from "./App";
 import "./index.css";
-import App from "./App.tsx";
+import { BrowserRouter } from "react-router-dom";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
-import "./styles/reset.css";
-import "./styles/variables.css";
-import "./styles/global.css";
-
-const rootElement = document.getElementById("root");
-
-if (!rootElement) {
-  throw new Error("Root element not found");
-}
-
-ReactDOM.createRoot(rootElement).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <PayPalScriptProvider
+      options={{
+        clientId:
+          "AUm1biPUhANbRrlItpAYkkhs_4LlsvHQ197HrmUS-pRUushd-U5PCn6TFqWfZ9IG1_9kho_fiX2Ye3OU", // sandbox
+        currency: "AUD",
+      }}
+    >
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </PayPalScriptProvider>
   </React.StrictMode>,
 );
