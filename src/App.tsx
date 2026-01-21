@@ -6,13 +6,16 @@ import CheckoutPage from "./pages/CheckoutPage";
 import AuthGuard from "./components/AuthGuard";
 import Header from "./components/Header";
 
-export default function App() {
+function App() {
   return (
     <>
       <Header />
       <Routes>
+        {/* Public Routes */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/" element={<ProductsPage />} />
+
+        {/* Protected Routes */}
         <Route
           path="/cart"
           element={
@@ -33,3 +36,5 @@ export default function App() {
     </>
   );
 }
+
+export default App;

@@ -6,7 +6,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-export default function AuthGuard({ children }: Props) {
+const AuthGuard = ({ children }: Props) => {
   const token = useAuthStore((s) => s.token);
   const location = useLocation();
 
@@ -17,4 +17,6 @@ export default function AuthGuard({ children }: Props) {
 
   // Logged in → show children
   return children;
-}
+};
+
+export default AuthGuard;

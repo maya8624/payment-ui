@@ -3,59 +3,55 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useAuthStore } from "../store/authStore";
 
 export default function LoginPage() {
+  const login = useAuthStore((s) => s.login);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const login = useAuthStore((s) => s.login);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
-  const location = useLocation();
+  // const location = useLocation();
 
-  const from = (location.state as any)?.from?.pathname || "/";
+  // const from = (location.state as any)?.from?.pathname || "/";
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (email && password) {
-      const fakeToken = "jwt-token-from-backend";
-      login(fakeToken);
-      navigate(from, { replace: true });
-    } else {
-      alert("Enter email and password");
+  const handleLogin = async () => {
+    try {
+      setError("");
+      await login(email, password);
+      navigate("/products");
+    } catch (err: any) {
+      setError(err.message);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
-      <div className="bg-white shadow-lg rounded-xl p-8 max-w-md w-full">
-        <h1 className="text-3xl font-bold mb-6 text-gray-800 text-center">
+    <div className="flex min-h-screen items-center justify-center bg-gray-100">
+      <div className="w-full max-w-sm rounded-xl bg-white p-6 shadow">
+        <h1 className="mb-4 text-xl font-semibold">Login</h1>
+
+        {error && <p className="mb-2 text-sm text-red-500">{error}</p>}
+
+        <input
+          className="mb-2 w-full rounded border p-2"
+          placeholder="Email"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <input
+          className="mb-4 w-full rounded border p-2"
+          type="password"
+          placeholder="Password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <button
+          onClick={handleLogin}
+          className="w-full rounded bg-blue-600 py-2 text-white hover:bg-blue-700"
+        >
           Login
-        </h1>
+        </button>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-          />
-
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-          />
-
-          <button
-            type="submit"
-            className="bg-blue-500 text-white font-semibold px-4 py-2 rounded-lg hover:bg-blue-600 transition"
-          >
-            Login
-          </button>
-        </form>
+        <p className="mt-3 text-xs text-gray-500">
+          Test: test@domain.dev / 1234
+        </p>
       </div>
     </div>
   );

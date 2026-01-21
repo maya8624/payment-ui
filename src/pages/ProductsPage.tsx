@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { useCartStore } from "../store/cartStore";
 import type { Product } from "../types/product";
+// const [loading, setLoading] = useState(true);
+// const products = await get<Product[]>("/api/products");
+// const orderId = await post<{ id: string }>("/api/orders", { amount });
 
 const dummyProducts: Product[] = [
   { id: 1, name: "Product A", price: 25 },
@@ -9,7 +12,8 @@ const dummyProducts: Product[] = [
   { id: 4, name: "Product D", price: 30 },
 ];
 
-export default function ProductsPage() {
+const ProductsPage = () => {
+  // if (loading) return <p>Loading products...</p>;
   const add = useCartStore((s) => s.add);
 
   return (
@@ -36,4 +40,6 @@ export default function ProductsPage() {
       ))}
     </div>
   );
-}
+};
+
+export default ProductsPage;
