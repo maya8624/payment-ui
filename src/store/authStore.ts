@@ -40,7 +40,7 @@ export const useAuthStore = create<AuthState>()(
             name: "Test User",
             role: "USER",
           },
-          token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30",
+          token: "fake.jwt.from.backend",
           isAuthenticated: true,
         });
       },

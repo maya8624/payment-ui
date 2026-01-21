@@ -1,8 +1,9 @@
 import axios from "axios";
+import { config } from "../config/config";
 import { useAuthStore } from "../store/authStore";
 
 const api = axios.create({
-  baseURL: "https://localhost:7289/api/", // your .NET backend URL
+  baseURL: config.apiBaseUrl, 
   headers: {
     "Content-Type": "application/json",
   },

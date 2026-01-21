@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useCartStore } from "../store/cartStore";
 import type { Product } from "../types/product";
+import { get } from "../services/apiHelper";
 // const [loading, setLoading] = useState(true);
-// const products = await get<Product[]>("/api/products");
+// const products = await get<Product[]>("/api/order", );
 // const orderId = await post<{ id: string }>("/api/orders", { amount });
 
 const dummyProducts: Product[] = [
